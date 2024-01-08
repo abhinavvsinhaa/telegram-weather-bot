@@ -7,9 +7,6 @@ export type UserDocument = HydratedDocument<User>
 export class User {
     @Prop({ required: true, unique: true })
     chatId: string
-
-    @Prop({ required: true, unique: true })
-    userId: string
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
