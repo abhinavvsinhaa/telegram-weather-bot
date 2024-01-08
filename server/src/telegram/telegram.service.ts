@@ -14,12 +14,29 @@ export class TelegramService {
     constructor(@InjectModel(User.name) private userModel: Model<User>) {
         this.bot = new TelegramBot(this.TELEGRAM_TOKEN, { polling: true })
 
-        this.bot.onText(/\/subscribe (.+)/, this.onSubscribe)
+        this.bot.onText(/\/subscribe/, this.onSubscribe)
         this.bot.on("message", this.onReceiveMessage)
     }
     
     onSubscribe = (message: any, match: string) => {
+        (async (chatId: string): Promise<any> => {
+            try {
+                let user = await this.userModel.findOne({ chatId })
+                if (user) {
+                    this.sendMessage(chatId, "You've already subscribed")
+                    return
+                }
 
+                user = await this.userModel.create({
+                    chatId
+                })
+
+                this.logger.debug("user created", user)
+                this.sendMessage(chatId, "successfully subscribed ✨")
+            } catch (error) {
+                this.logger.debug("error in finding and creating a user: ", error)
+            }
+        })(message.chat.id);
     }
 
     onReceiveMessage = (message: any) => {
