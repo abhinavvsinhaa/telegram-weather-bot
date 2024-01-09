@@ -103,7 +103,7 @@ export class TelegramService {
                 })
 
                 this.logger.debug("user created", user)
-                this.sendMessage(chatId, "successfully subscribed ✨")
+                this.sendMessage(chatId, "Successfully subscribed ✨")
             } catch (error) {
                 this.logger.debug("error in finding and creating a user: ", error)
             }
