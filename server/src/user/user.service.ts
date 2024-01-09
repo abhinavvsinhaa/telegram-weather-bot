@@ -20,4 +20,70 @@ export class UserService {
         const users = await this.prismaService.user.findMany({})
         return users.filter(user => user.isAdmin != true)
     }
+
+    async deleteUser(id: string): Promise<string> {
+        const user = await this.prismaService.user.findFirst({
+            where: {
+                id
+            }
+        })
+
+        if (!user || user.isAdmin) {
+            return "Sorry the action cannot be completed"
+        }
+
+        await this.prismaService.user.delete({
+            where: {
+                id
+            }
+        })
+
+        return "User deleted"
+    }
+
+    async blockUser(id: string): Promise<string> {
+        const user = await this.prismaService.user.findFirst({
+            where: {
+                id
+            }
+        })
+
+        if (!user || user.isAdmin) {
+            return "Sorry the action cannot be completed"
+        }
+
+        await this.prismaService.user.update({
+            where: {
+                id
+            },
+            data: {
+                isBlocked: true
+            }
+        })
+
+        return "User blocked"
+    }
+
+    async unblockUser(id: string): Promise<string> {
+        const user = await this.prismaService.user.findFirst({
+            where: {
+                id
+            }
+        })
+
+        if (!user || user.isAdmin) {
+            return "Sorry the action cannot be completed"
+        }
+
+        await this.prismaService.user.update({
+            where: {
+                id
+            },
+            data: {
+                isBlocked: false
+            }
+        })
+
+        return "User unblocked"
+    }
 }
