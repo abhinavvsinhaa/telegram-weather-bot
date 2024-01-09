@@ -1,11 +1,16 @@
 import { Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { UserService } from './user.service';
-import { User } from '@prisma/client';
 
 @Controller('users')
 export class UserController {
     constructor(private userService: UserService) {}
+
+    @Post('/login')
+    async loginUser(@Req() request: Request): Promise<boolean> {
+        const res = await this.userService.logInAdmin(request.body)
+        return res
+    }
 
     @Patch('/:id/:action')
     async updateUser(@Param('id') id: string, @Param('action') action: string): Promise<string> {

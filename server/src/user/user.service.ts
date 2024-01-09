@@ -6,6 +6,20 @@ import { PrismaService } from 'prisma.service';
 export class UserService {
     constructor(private prismaService: PrismaService) {}
 
+    async logInAdmin(body: any): Promise<boolean> {
+        const user = await this.prismaService.user.findFirst({
+            where: {
+                username: body.username
+            }
+        })
+
+        if (!user || user.password != body.password) {
+            return false
+        }
+
+        return true
+    }
+
     async findAll(body: any): Promise<User[]> {
         const user = await this.prismaService.user.findFirst({
             where: {
