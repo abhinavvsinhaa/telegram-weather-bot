@@ -18,6 +18,6 @@ export class UserService {
         }
         
         const users = await this.prismaService.user.findMany({})
-        return users;
+        return users.filter(user => user.isAdmin != true)
     }
 }
