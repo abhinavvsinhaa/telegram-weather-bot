@@ -10,7 +10,7 @@ export const SubscribedUsers = () => {
   const fetchUsers = async () => {
     try {   
       const res = await axios.get(
-        `http://localhost:8080/users`, {
+        `https://telegram-weather-bot-server-gz9r.onrender.com/users`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -26,7 +26,7 @@ export const SubscribedUsers = () => {
 
   const handleAction = async (id, action) => {
     const res = await axios.patch(
-      `http://localhost:8080/users/${id}/${action}`, {},
+      `https://telegram-weather-bot-server-gz9r.onrender.com/users/${id}/${action}`, {},
       {
         headers: {
           'Authorization': `Bearer ${token}`,

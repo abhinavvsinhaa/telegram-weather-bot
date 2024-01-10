@@ -14,7 +14,7 @@ export const Login = () => {
   const onLoginHandler = async (event) => {
     try {
       event.preventDefault()
-      const res = await axios.post(`http://localhost:8080/auth/login`, {
+      const res = await axios.post(`https://telegram-weather-bot-server-gz9r.onrender.com/auth/login`, {
         username,
         password
       })
