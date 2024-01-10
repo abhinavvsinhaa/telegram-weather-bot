@@ -22,7 +22,7 @@ export class UserController {
         }
     }
 
-    @Post()
+    @Get()
     async findAll(@Req() request: Request): Promise<any> {
         const res = await this.userService.findAll()
         return res

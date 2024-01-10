@@ -14,7 +14,7 @@
 }
 
 .login-btn, .update-btn {
-  width: 55%;
+  width: 50%;
   margin-bottom: 20px;
   padding: 10px;
   background-color: rgb(9, 88, 236);
@@ -26,6 +26,7 @@
   width: 50%;
   margin-bottom: 20px;
   padding: 10px;
+  border: 1px solid black;
 }
 
 .dashboard-inner-wrapper {
