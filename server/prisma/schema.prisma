@@ -16,7 +16,6 @@ model User {
   password  String?
   isAdmin   Boolean  @default(false)
   chatId    String?  @unique
-  token     String?  @unique
   isBlocked Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
