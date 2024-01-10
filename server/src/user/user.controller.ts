@@ -6,12 +6,6 @@ import { UserService } from './user.service';
 export class UserController {
     constructor(private userService: UserService) {}
 
-    @Post('/login')
-    async loginUser(@Req() request: Request): Promise<boolean> {
-        const res = await this.userService.logInAdmin(request.body)
-        return res
-    }
-
     @Patch('/:id/:action')
     async updateUser(@Param('id') id: string, @Param('action') action: string): Promise<string> {
         if (action == 'block') {
@@ -30,7 +24,7 @@ export class UserController {
 
     @Post()
     async findAll(@Req() request: Request): Promise<any> {
-        const res = await this.userService.findAll(request.body)
+        const res = await this.userService.findAll()
         return res
     }
 

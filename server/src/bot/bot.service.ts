@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'prisma.service';
 
 @Injectable()
@@ -6,17 +6,7 @@ export class BotService {
     constructor(private prismaService: PrismaService) {}
 
     async updateBotKey(body: any): Promise<string> {
-        try {
-            const user = await this.prismaService.user.findFirst({
-                where: {
-                    username: body.username
-                }
-            })
-    
-            if (!user || !user.isAdmin || user.password != body.password ) {
-                return "unauthorized access"
-            }
-    
+        try {    
             const bot = await this.prismaService.bot.findFirst({})
     
             if (!bot) {
